@@ -4,18 +4,26 @@
 #
 class apache {
   package { ['apache2', 'apache2-mpm-prefork']:
-    ensure => present;
+    ensure => present
   }
 
   service { 'apache2':
     ensure  => running,
-    require => Package['apache2'];
+    require => Package['apache2']
   }
 
   file { '/var/www':
     ensure => 'link',
     target => '/vagrant',
-    force => true,
+    require => Package['apache2'],
+    notify => Service['apache2'],
+    replace => yes,
+    force => true
+  }
+
+  file { '/var/www/html':
+    ensure => 'absent',
+    force => true
   }
 
   apache::conf { ['apache2.conf',
