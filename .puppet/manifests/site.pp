@@ -15,4 +15,6 @@ File {
   mode  => '0644',
 }
 
+debug("Starting devbox with hostname: ${::hostname}")
+
 include baseconfig, apache, mysql, php
