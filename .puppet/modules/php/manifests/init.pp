@@ -9,7 +9,6 @@ class php {
              'php5-curl',
              'php5-gd',
              'php5-intl',
-             'php5-json',
              'php5-mcrypt',
              'php5-mysql',
              'php5-sqlite',
@@ -37,11 +36,17 @@ class php {
       require => Package['php5-cli'];
   }
 
-  # Set root password
+  exec { 'enable-mcrypt':
+    command => 'php5enmod mcrypt',
+    path    => ['/bin', '/usr/bin', '/usr/sbin'],
+    require => Package['php5-mcrypt'],
+    notify => Service['apache2'];
+  }
+
   exec { 'enable-pdo-mysql':
     command => 'php5enmod pdo_mysql',
     path    => ['/bin', '/usr/bin', '/usr/sbin'],
-    require => Package['php5', 'php5-cli'],
+    require => Package['php5', 'php5-cli', 'php5-mysql'],
     notify => Service['apache2'];
   }
 }
