@@ -58,6 +58,10 @@ $extensions = [
         <h2>Installed software</h2>
         <table class="table table-striped">
             <tr>
+                <td>Web Server</td>
+                <td><?php echo $_SERVER['SERVER_SOFTWARE']; ?></td>
+            </tr>
+            <tr>
                 <td>PHP Version</td>
                 <td><?php echo phpversion(); ?></td>
             </tr>
