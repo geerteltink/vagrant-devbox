@@ -12,8 +12,6 @@ class php {
              'php5-mcrypt',
              'php5-mysql',
              'php5-sqlite',
-             'php5-xmlrpc',
-             'php5-xsl',
              'php5-xdebug']:
     ensure => present;
   }
