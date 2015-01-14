@@ -11,6 +11,7 @@ class php {
              'php5-intl',
              'php5-json',
              'php5-mcrypt',
+             'php5-mysql',
              'php5-sqlite',
              'php5-xmlrpc',
              'php5-xsl',
@@ -34,5 +35,13 @@ class php {
     '/etc/php5/cli/php.ini':
       source  => 'puppet:///modules/php/php-cli.ini',
       require => Package['php5-cli'];
+  }
+
+  # Set root password
+  exec { 'enable-pdo-mysql':
+    command => 'php5enmod pdo_mysql',
+    path    => ['/bin', '/usr/bin', '/usr/sbin'],
+    require => Package['php5', 'php5-cli'],
+    notify => Service['apache2'];
   }
 }
