@@ -96,6 +96,25 @@ $extensions = [
                 </div>
             <?php endforeach; ?>
         </div>
+
+        <h2>Docs</h2>
+        <div style="-webkit-column-count:4;">
+            <div>
+                <a href="https://github.com/twentyfirsthall/docs/blob/master/coding-standards.md">
+                    Coding standards
+                </a>
+            </div>
+            <div>
+                <a href="https://github.com/twentyfirsthall/docs/blob/master/git-workflow.md">
+                    Git workflow
+                </a>
+            </div>
+            <div>
+                <a href="https://github.com/twentyfirsthall/docs/blob/master/symfony-cli.md">
+                    Symfony console commands
+                </a>
+            </div>
+        </div>
     </main>
 
     <footer class="container">
