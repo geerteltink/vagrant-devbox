@@ -15,7 +15,8 @@ $extensions = [
     'mcrypt',
     'pdo_mysql',
     'pdo_sqlite',
-    'xdebug'
+    'xdebug',
+    'zend opcache'
 ];
 
 ?>
@@ -80,24 +81,21 @@ $extensions = [
         </table>
 
         <h2>PHP Modules</h2>
-        <table class="table table-striped">
+        <div style="-webkit-column-count:4;">
             <?php foreach ($extensions as $key => $extension) : ?>
-                <tr>
-                    <td><?php echo $extension; ?></td>
-                    <td>
-                        <?php if (extension_loaded($extension)) : ?>
-                            <span class="label label-success">
-                                <i class="glyphicon glyphicon-ok"></i> &nbsp; <?php echo phpversion($extension); ?>
-                            </span>
-                        <?php else : ?>
-                            <span class="label label-danger">
-                                <i class="glyphicon glyphicon-remove"></i>
-                            </span>
-                        <?php endif; ?>
-                    </td>
-                </tr>
+                <div>
+                    <?php if (extension_loaded($extension)) : ?>
+                        <span class="label label-success">
+                            <i class="glyphicon glyphicon-ok"></i> &nbsp; <?php echo $extension; ?> <?php echo phpversion($extension); ?>
+                        </span>
+                    <?php else : ?>
+                        <span class="label label-danger">
+                            <i class="glyphicon glyphicon-remove"></i> &nbsp; <?php echo $extension; ?>
+                        </span>
+                    <?php endif; ?>
+                </div>
             <?php endforeach; ?>
-        </table>
+        </div>
     </main>
 
     <footer class="container">
