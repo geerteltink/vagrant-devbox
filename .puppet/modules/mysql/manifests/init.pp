@@ -49,10 +49,12 @@ class mysql {
     require => Exec['create-database']
   }
 
-/*
-  exec { 'load-dynamic-sql':
-    command => 'mysql -u root -proot < /vagrant/sites/dynamic.sql',
-    path    => ['/bin', '/usr/bin'],
-    require => Exec['mysql-set-root-password'];
-  }*/
+  # Import database schema
+  if file('/vagrant/build/db-schema.sql', '/dev/null') != '' {
+    exec { 'import-schema':
+      command => "mysql -u $username -p$password $database < /vagrant/build/db-schema.sql",
+      path    => ['/bin', '/usr/bin'],
+      require => Exec['create-user']
+    }
+  }
 }
