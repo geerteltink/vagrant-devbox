@@ -31,4 +31,14 @@ class apache {
                   'ports.conf',
                   'sites-available/000-default.conf']:
   }
+
+  # Enable mods
+  file { '/etc/apache2/mods-enabled/rewrite.load':
+    ensure => 'link',
+    target => '/etc/apache2/mods-available/rewrite.load',
+    require => Package['apache2'],
+    notify => Service['apache2'],
+    replace => yes,
+    force => true
+  }
 }
