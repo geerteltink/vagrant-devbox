@@ -17,13 +17,16 @@ class mysql {
     ensure  => running,
     require => Package['mysql-server']
   }
-/*
-  file { '/etc/mysql/my.cnf':
-    source  => 'puppet:///modules/mysql/my.cnf',
-    require => Package['mysql-server'],
-    notify  => Service['mysql']
+
+  file {
+    '/etc/mysql/conf.d/optimized.cnf':
+      content => template('mysql/optimized.cnf.erb'),
+      owner => 'root',
+      group => 'root',
+      mode  => '0644',
+      require => Package['mysql-server'],
+      notify  => Service['mysql'];
   }
-*/
 
   # Set root password
   exec { 'set-root-password':
