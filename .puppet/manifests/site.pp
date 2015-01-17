@@ -17,4 +17,4 @@ File {
 
 debug("Starting devbox with hostname: ${::hostname}")
 
-include baseconfig, apache, mysql, php, phpmyadmin
+include baseconfig, apache, mysql, php, phpmyadmin, phantomjs
