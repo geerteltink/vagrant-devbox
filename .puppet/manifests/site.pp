@@ -12,7 +12,7 @@ class { 'baseconfig':
 File {
   owner => 'root',
   group => 'root',
-  mode  => '0644',
+  mode  => '0644'
 }
 
 debug("Starting devbox with hostname: ${::hostname}")
