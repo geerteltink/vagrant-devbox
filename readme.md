@@ -16,7 +16,7 @@ Vagrant DevBox is a development environment customized for our own needs.
 
 - [Composer](http://getcomposer.org/)
 - [Vagrant](http://vagrantup.com/v1/docs/getting-started/index.html)
-- [VirtualBox](https://www.virtualbox.org/) or [another provider](https://docs.vagrantup.com/v2/getting-started/providers.html)
+- [VirtualBox](https://www.virtualbox.org/)
 
 ## Getting Started
 
