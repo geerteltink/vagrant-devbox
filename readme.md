@@ -14,7 +14,6 @@ Vagrant DevBox is a development environment customized for our own needs.
 
 ## Prerequisites
 
-- [Composer](http://getcomposer.org/)
 - [Vagrant](http://vagrantup.com/v1/docs/getting-started/index.html)
 - [VirtualBox](https://www.virtualbox.org/)
 
@@ -30,11 +29,7 @@ This is a fairly simple project to get up and running. The procedure for startin
 
 You can access your vagrant box at ``http://localhost:3333/``.
 
-The root user and MySQL root password is ``vagrant``.
-
-MySQL database, username and password are the same as the hostname configured in the Vagrantfile.
-
-You can access phpMyAdmin: ``http://localhost:3333/phpmyadmin/``.
+You can access phpMyAdmin: ``http://localhost:3333/phpmyadmin/``. The MySQL database, username and password are the same as the hostname configured in the Vagrantfile.
 
 ## Vagrant commands
 
