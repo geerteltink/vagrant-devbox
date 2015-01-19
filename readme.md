@@ -5,9 +5,9 @@ Vagrant DevBox is a development environment customized for our own needs.
 ## What's Installed?
 
 - Ubuntu Trusty (14.04)
-- Apache 2.4.x
-- MySQL 5.5.x
-- PHP 5.5.x
+- Apache (2.4.x)
+- MySQL (5.5.x)
+- PHP (5.5.x)
 - PhpMyAdmin
 - Xdebug
 - PhantomJS (running as a deamon)
