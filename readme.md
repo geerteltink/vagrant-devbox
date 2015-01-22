@@ -21,7 +21,7 @@ Vagrant DevBox is a development environment customized for our own needs.
 
 This is a fairly simple project to get up and running. The procedure for starting up a working development environment is as follows:
 
-1. Clone the project.
+1. Create a new project: ``composer create-project twentyfirsthall/vagrant-devbox <project-path>``
 2. Run the command ``vagrant up`` from the directory.
 3. Open your browser to http://localhost:3333/.
 
