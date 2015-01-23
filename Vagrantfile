@@ -8,11 +8,16 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.hostname = hostname + ".lan"
   config.vm.network "forwarded_port", guest: 80, host: 3333
+  config.vm.network "public_network"
 
   config.vm.provider "virtualbox" do |vb|
-    #vb.gui = true
-    #vb.memory = "1024"
     vb.name = hostname
+    #vb.gui = true
+    #vb.customize ["modifyvm", :id, "--memory", "1024", "--cpus", "2"]
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+    vb.customize ["modifyvm", :id, "--natdnshostresolver2", "on"]
+    vb.customize ["modifyvm", :id, "--natdnsproxy2", "on"]
   end
 
   config.vm.provision :puppet do |puppet|
