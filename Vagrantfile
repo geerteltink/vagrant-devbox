@@ -1,8 +1,7 @@
-# encoding: utf-8
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
 hostname = "devbox"
+memory = 1024
+cpus = 4
+gui = false
 
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
@@ -10,10 +9,15 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: 80, host: 3333
   config.vm.network "public_network"
 
+  #config.vm.synced_folder ".", "/vagrant", type: "nfs",  mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=2']
+  #config.vm.synced_folder ".", "/vagrant", type: "nfs"
+
   config.vm.provider "virtualbox" do |vb|
     vb.name = hostname
-    #vb.gui = true
-    vb.customize ["modifyvm", :id, "--memory", "1024"]
+    vb.memory = memory
+    vb.cpus = cpus
+    vb.gui = gui
+
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
     vb.customize ["modifyvm", :id, "--natdnshostresolver2", "on"]
