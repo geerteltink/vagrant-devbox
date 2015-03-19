@@ -14,7 +14,7 @@
         "homepage": "https://xtreamwayz.github.io/",
         "role"    : "Lead Developer"
     }],
-    "require": {
-        "twentyfirsthall/vagrant-puppet": "dev-master"
-    }
+    "require-dev": {
+        "twentyfirsthall/vagrant-puppet": "~1.1"
+    },
 }

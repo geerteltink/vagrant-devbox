@@ -24,7 +24,12 @@ Vagrant.configure(2) do |config|
     vb.customize ["modifyvm", :id, "--natdnsproxy2", "on"]
   end
 
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+  end
+
   config.vm.provision :puppet do |puppet|
+    puppet.hiera_config_path = "vendor/twentyfirsthall/vagrant-puppet/manifests/hiera.yaml"
     puppet.manifests_path = "vendor/twentyfirsthall/vagrant-puppet/manifests"
     puppet.manifest_file = "site.pp"
     puppet.module_path = "vendor/twentyfirsthall/vagrant-puppet/modules"
