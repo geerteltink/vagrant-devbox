@@ -16,5 +16,5 @@
     }],
     "require-dev": {
         "twentyfirsthall/vagrant-puppet": "~1.1"
-    },
+    }
 }
