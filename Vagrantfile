@@ -7,7 +7,6 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.hostname = hostname + ".lan"
   config.vm.network "forwarded_port", guest: 80, host: 3333
-  config.vm.network "forwarded_port", guest: 3306, host: 33066
   config.vm.network "public_network"
 
   #config.vm.synced_folder ".", "/vagrant", type: "nfs",  mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=2']
