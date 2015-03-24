@@ -9,6 +9,12 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: 80, host: 3333
   config.vm.network "public_network"
 
+  # Enable SSH forwarding
+  config.ssh.forward_agent = true
+
+  # Prevent "stdin: not a tty" errors
+  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+
   #config.vm.synced_folder ".", "/vagrant", type: "nfs",  mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=2']
   #config.vm.synced_folder ".", "/vagrant", type: "nfs"
 
