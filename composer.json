@@ -15,6 +15,6 @@
         "role"    : "Lead Developer"
     }],
     "require-dev": {
-        "twentyfirsthall/vagrant-puppet": "~1.1"
+        "twentyfirsthall/vagrant-puppet": "~1.6"
     }
 }

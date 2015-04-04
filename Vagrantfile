@@ -1,7 +1,5 @@
-hostname = "devbox"
-memory = 1024
-cpus = 4
-gui = false
+# Use the directory name as the default hostname
+hostname = File.basename(File.dirname(__FILE__));
 
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
@@ -15,14 +13,14 @@ Vagrant.configure(2) do |config|
   # Prevent "stdin: not a tty" errors
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
-  #config.vm.synced_folder ".", "/vagrant", type: "nfs",  mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=2']
-  #config.vm.synced_folder ".", "/vagrant", type: "nfs"
+  # Share folders to the guest VM
+  config.vm.synced_folder ".", "/vagrant", type: "nfs"
 
   config.vm.provider "virtualbox" do |vb|
     vb.name = hostname
-    vb.memory = memory
-    vb.cpus = cpus
-    vb.gui = gui
+    vb.memory = 1024
+    vb.cpus = 4
+    vb.gui = false
 
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
@@ -35,7 +33,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.provision :puppet do |puppet|
-    puppet.hiera_config_path = "vendor/twentyfirsthall/vagrant-puppet/manifests/hiera.yaml"
+    puppet.hiera_config_path = "vendor/twentyfirsthall/vagrant-puppet/hieradata/hiera.yaml"
     puppet.manifests_path = "vendor/twentyfirsthall/vagrant-puppet/manifests"
     puppet.manifest_file = "site.pp"
     puppet.module_path = "vendor/twentyfirsthall/vagrant-puppet/modules"
