@@ -1,0 +1,24 @@
+# Ignore composer generated files and directories
+composer.lock
+public/content/mu-plugins/*
+public/content/plugins/*
+public/content/themes/*
+public/uploads/*
+public/wp/
+vendor/
+
+# If you have a plugin, theme, or mu-plugin that you really do want to put into
+# version control, add an exception here. Exceptions will look like this:
+#   !public/content/plugins/plugin-folder
+!public/content/mu-plugins/index.php
+!public/content/mu-plugins/register-theme-directory.php
+!public/content/plugins/index.php
+!public/content/themes/index.php
+!public/uploads/.gitignore
+
+# Ignore the local config
+public/local-config.php
+
+# Ignore other generated files
+.idea/
+.vagrant/
