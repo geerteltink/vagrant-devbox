@@ -28,10 +28,19 @@ Vagrant.configure(2) do |config|
     vb.customize ["modifyvm", :id, "--natdnsproxy2", "on"]
   end
 
+  # A Vagrant plugin that helps you reduce the amount of coffee you drink while
+  # waiting for boxes to be provisioned by sharing a common package cache among
+  # similiar VM instances.
+  #
+  # Install with: `vagrant plugin install vagrant-cachier`
   if Vagrant.has_plugin?("vagrant-cachier")
     config.cache.scope = :box
   end
 
+  # Shell provisioners to do necessary prep for subsequent puppet provisioning
+  config.vm.provision :shell, :inline => "/usr/bin/apt-get install -y software-properties-common puppet libaugeas-ruby augeas-tools ruby"
+
+  # Enable provisioning with Puppet stand alone.
   config.vm.provision :puppet do |puppet|
     puppet.hiera_config_path = "vendor/twentyfirsthall/vagrant-puppet/hieradata/hiera.yaml"
     puppet.manifests_path = "vendor/twentyfirsthall/vagrant-puppet/manifests"
