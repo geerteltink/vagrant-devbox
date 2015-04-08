@@ -1,46 +1,49 @@
-# Cache and logs (Symfony2)
-app/cache/*
-app/logs/*
-!app/cache/.gitkeep
-!app/logs/.gitkeep
+._*
+.buildpath
+.DS_Store
+.htpasswd
+.idea
+.project
+.settings
+.vagrant
+.~lock.*
+composer.phar
+nbproject
+phpunit.xml
+Thumbs.db
 
-# Cache and logs (Symfony3)
-var/cache/*
-var/logs/*
-!var/cache/.gitkeep
-!var/logs/.gitkeep
-
-# Parameters
-app/config/parameters.yml
-app/config/parameters.ini
-
-# Managed by Composer
-app/bootstrap.php.cache
-var/bootstrap.php.cache
-bin/*
-!bin/console
-!bin/symfony_requirements
+bin/
+build/vagrant.yaml
+build/bower_components/
+build/cache/
+build/logs/
 vendor/
 
-# Assets and user uploads
-web/bundles/
-web/uploads/
+# Zend Framework 2
+config/autoload/local.php
+config/autoload/*.local.php
 
-# PHPUnit
+# Symfony 2
+app/bootstrap.php.cache
 app/phpunit.xml
-phpunit.xml
+app/cache/*
+!app/cache/.gitkeep
+app/config/parameters.yml
+app/config/parameters.ini
+app/logs/*
+!app/logs/.gitkeep
+app/Resources/views/header-custom.html.twig
+app/Resources/views/footer-custom.html.twig
+app/Resources/views/javascript-custom.html.twig
+!bin/console
+!bin/symfony_requirements
 
-# Build data
-build/vagrant.yaml
-build/logs/
+/*/bundles/
+/*/assets/
 
-# Composer PHAR
-composer.phar
-composer.lock
-
-# Vagrant
-.vagrant/
-html/
-
-# JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
-.idea/
+# Symfony 3
+var/cache/*
+!var/cache/.gitkeep
+var/bootstrap.php.cache
+var/logs/*
+!var/logs/.gitkeep
