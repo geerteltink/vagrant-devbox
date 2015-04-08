@@ -25,13 +25,13 @@ $extensions = [
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Vagrant LAMP Stack</title>
+    <title>DevBox - Local Development Environment</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <!-- Place favicon.ico in the root directory -->
 
-    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.1/united/bootstrap.min.css" rel="stylesheet" />
+    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/united/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
     <!--[if lt IE 8]>
@@ -100,6 +100,16 @@ $extensions = [
         <h2>Docs</h2>
         <div style="-webkit-column-count:4;">
             <div>
+                <a href="https://github.com/twentyfirsthall/vagrant-devbox/blob/master/readme.md">
+                    DevBox
+                </a>
+            </div>
+            <div>
+                <a href="https://github.com/twentyfirsthall/vagrant-puppet/blob/master/readme.md">
+                    Puppet
+                </a>
+            </div>
+            <div>
                 <a href="https://github.com/twentyfirsthall/docs/blob/master/coding-standards.md">
                     Coding standards
                 </a>
@@ -125,6 +135,6 @@ $extensions = [
     </footer>
 
     <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </body>
 </html>
