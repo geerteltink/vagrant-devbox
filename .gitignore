@@ -31,7 +31,7 @@ app/phpunit.xml
 phpunit.xml
 
 # Build data
-build/vagrant.xml
+build/vagrant.yaml
 build/logs/
 
 # Composer PHAR
