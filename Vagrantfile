@@ -34,14 +34,18 @@ Vagrant.configure(2) do |config|
   config.vm.box = settings["box"] ||= "ubuntu/trusty64"
   config.vm.hostname = settings["hostname"] ||= display_name + ".lan"
 
-  # Configure the network
-  #config.vm.network "public_network"
+  # Configure a private network, needed for NFS synced folders
   config.vm.network :private_network, ip: settings["ip"] ||= "192.168.10.10"
 
   # Configure port forwarding
   config.vm.network "forwarded_port", guest: 80, host: 8000
   config.vm.network "forwarded_port", guest: 443, host: 44300
   config.vm.network "forwarded_port", guest: 3306, host: 33060
+
+  # Enable NFS synced folders
+  # By default NFS sync is ignored on windows. To enable this (windows only !!!)
+  # install the vagrant-winnfsd plugin: `vagrant plugin install vagrant-winnfsd`
+  config.vm.synced_folder ".", "/vagrant", type: "nfs"
 
   # Enable SSH forwarding
   config.ssh.forward_agent = true
@@ -70,9 +74,7 @@ Vagrant.configure(2) do |config|
 
   # A Vagrant plugin that helps you reduce the amount of coffee you drink while
   # waiting for boxes to be provisioned by sharing a common package cache among
-  # similiar VM instances.
-  #
-  # Install with: `vagrant plugin install vagrant-cachier`
+  # similiar VM instances. Install with: `vagrant plugin install vagrant-cachier`
   if Vagrant.has_plugin?("vagrant-cachier")
     config.cache.scope = :box
   end

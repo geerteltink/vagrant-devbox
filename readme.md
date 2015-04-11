@@ -13,7 +13,8 @@ Prerequisites
 
 - [Vagrant](http://vagrantup.com/v1/docs/getting-started/index.html)
 - [VirtualBox](https://www.virtualbox.org/)
-- [vagrant-cachier](https://github.com/fgrehm/vagrant-cachier) (optional)
+- [vagrant-cachier](https://github.com/fgrehm/vagrant-cachier) (optional) Reduce the amount of coffee you drink while waiting for boxes to be provisioned.
+- [vagrant-winnfsd](https://github.com/GM-Alex/vagrant-winnfsd) (optional, windows only!) Enable NFS synced folders support on windows.
 
 By default agent forwarding over SSH connections is enabled. On the host system you need to have `ssh-agent` running with your key(s) added. If the agent is running, tools like git will just work without importing your valuable keys into the vagrant box.
 
