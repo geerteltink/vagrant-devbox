@@ -42,10 +42,13 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: 443, host: 44300
   config.vm.network "forwarded_port", guest: 3306, host: 33060
 
-  # Enable NFS synced folders
-  # By default NFS sync is ignored on windows. To enable this (windows only !!!)
-  # install the vagrant-winnfsd plugin: `vagrant plugin install vagrant-winnfsd`
-  config.vm.synced_folder ".", "/vagrant", type: "nfs"
+  # Setup synced folders
+  if settings.include? "folders"
+    settings["folders"].each do |folder|
+      mount_opts = folder["type"] == "nfs" ? ["rw,nolock,vers=3,actimeo=1"] : []
+      config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil, mount_options: mount_opts
+    end
+  end
 
   # Enable SSH forwarding
   config.ssh.forward_agent = true

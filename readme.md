@@ -41,6 +41,17 @@ Specific configurations
 
 There are specific wordpress and phpbb configuration files included in the `build` dir. Simply copy these file to your `<project_root>` dir (where this file is located) and run composer.
 
+Sharing git
+-----------
+
+// Sharable by others
+git config core.sharedRepository everybody
+git config core.filemode false
+
+git gc
+git repack -Ad      # kills in-pack garbage
+git prune           # kills loose garbage
+
 Vagrant commands
 ----------------
 
