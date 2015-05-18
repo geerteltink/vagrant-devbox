@@ -34,7 +34,7 @@ You can access your vagrant box at `http://localhost:8000/` or `http://192.168.1
 
 The source code can be found at `/vagrant`. The website is served from `/vagrant/public`.
 
-The MySQL database, username and password is `vagrant`. They can be customized in the optional `build/vagrant.yaml` file.
+The MySQL database, username and password is `vagrant`. They can be customized in the optional `<project_path>/vagrant.yaml` file.
 
 Specific configurations
 -----------------------

@@ -1,11 +1,15 @@
 #
 # Vagrant devbox
 #
-# To customize your virtual machine, copy `vendor/twentyfirsthall/vagrant-puppet/hieradata/default.yaml`
-# to `build/vagrant.yaml`. Vagrant settings are merged.
+# To set the virtual machine project settings, copy `vendor/twentyfirsthall/vagrant-puppet/hieradata/default.yaml`
+# to `<project_path>/vagrant.yaml`.
 #
-# Puppet module settings are overwritten per key. So if you want to change `apache::vhosts:`, you need to
-# configure the complete key and not just set `apache::vhosts::vagrant::port`.
+# Personal settings can be stored in `~/.devbox/vagrant.yaml`.
+#
+# Vagrant settings are merged in this order:
+#   - `<project_path>/vendor/twentyfirsthall/vagrant-puppet/hieradata/default.yaml`
+#   - `<project_path>/vagrant.yaml`
+#   - `~/.devbox/vagrant.yaml`
 #
 
 require 'yaml'
@@ -15,27 +19,39 @@ display_name = File.basename(File.dirname(__FILE__))
 
 # Load default settings
 default_yaml = File.join(__dir__, "vendor/twentyfirsthall/vagrant-puppet/hieradata/default.yaml")
-settings = YAML.load_file(default_yaml)["vagrant"]
+settings = YAML.load_file(default_yaml)
 
-# Load custom settings if any
-vagrant_yaml = File.join(__dir__, "build/vagrant.yaml")
-if File.exist?(vagrant_yaml)
-  custom_settings = YAML::load_file(vagrant_yaml)
-  if custom_settings.has_key?("vagrant")
-    settings.merge!(custom_settings["vagrant"])
-  end
+# Load project settings if any
+project_yaml = File.join(__dir__, "/vagrant.yaml")
+if File.exist?(project_yaml)
+    project_settings = YAML::load_file(project_yaml)
+    settings.merge!(project_settings)
+    puts "Project configuration merged from .vagrant.yaml"
 end
+
+# Load user settings if any
+user_yaml = File.join(File.expand_path("~/.devbox"), "/vagrant.yaml")
+if File.exist?(user_yaml)
+    user_settings = YAML::load_file(user_yaml)
+    settings.merge!(user_settings)
+    puts "User configuration merged from ~/.devbox/vagrant.yaml"
+end
+
+# Write settings to hiera config file
+File.open(".vagrant/config.yaml", "w") {|f| f.write(settings.to_yaml) }
+
+#puts YAML::dump(settings)
 
 Vagrant.configure(2) do |config|
   # Set the vm provider
-  ENV['VAGRANT_DEFAULT_PROVIDER'] = settings["provider"] ||= "virtualbox"
+  ENV['VAGRANT_DEFAULT_PROVIDER'] = settings["vagrant"]["provider"] ||= "virtualbox"
 
   # Configure the box
-  config.vm.box = settings["box"] ||= "ubuntu/trusty64"
-  config.vm.hostname = settings["hostname"] ||= display_name + ".lan"
+  config.vm.box = settings["vagrant"]["box"] ||= "ubuntu/trusty64"
+  config.vm.hostname = settings["vagrant"]["hostname"] ||= display_name + ".lan"
 
   # Configure a private network, needed for NFS synced folders
-  config.vm.network :private_network, ip: settings["ip"] ||= "192.168.10.10"
+  config.vm.network :private_network, ip: settings["vagrant"]["ip"] ||= "192.168.10.10"
 
   # Configure port forwarding
   config.vm.network "forwarded_port", guest: 80, host: 8000
@@ -43,8 +59,8 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: 3306, host: 33060
 
   # Setup synced folders
-  if settings.include? "folders"
-    settings["folders"].each do |folder|
+  if settings["vagrant"].include? "folders"
+    settings["vagrant"]["folders"].each do |folder|
       mount_opts = folder["type"] == "nfs" ? ["rw,nolock,vers=3,actimeo=1"] : []
       config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil, mount_options: mount_opts
     end
@@ -56,22 +72,22 @@ Vagrant.configure(2) do |config|
   # Prevent "stdin: not a tty" errors
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
-  # Configure A Few VirtualBox Settings
+  # Configure VirtualBox settings
   config.vm.provider "virtualbox" do |vb|
     vb.name = display_name
-    vb.gui = settings["gui"] ||= false
-    vb.customize ["modifyvm", :id, "--memory", settings["memory"] ||= "2048"]
-    vb.customize ["modifyvm", :id, "--cpus", settings["cpus"] ||= "1"]
+    vb.gui = settings["vagrant"]["gui"] ||= false
+    vb.customize ["modifyvm", :id, "--memory", settings["vagrant"]["memory"] ||= "2048"]
+    vb.customize ["modifyvm", :id, "--cpus", settings["vagrant"]["cpus"] ||= "1"]
     vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
 
-  # Configure A Few VMware Settings
+  # Configure VMware settings
   ["vmware_fusion", "vmware_workstation"].each do |vmware|
     config.vm.provider vmware do |v|
       v.vmx["displayName"] = display_name
-      v.vmx["memsize"] = settings["memory"] ||= 2048
-      v.vmx["numvcpus"] = settings["cpus"] ||= 1
+      v.vmx["memsize"] = settings["vagrant"]["memory"] ||= 2048
+      v.vmx["numvcpus"] = settings["vagrant"]["cpus"] ||= 1
     end
   end
 
@@ -91,6 +107,6 @@ Vagrant.configure(2) do |config|
     puppet.manifests_path = "vendor/twentyfirsthall/vagrant-puppet/manifests"
     puppet.manifest_file = "site.pp"
     puppet.module_path = "vendor/twentyfirsthall/vagrant-puppet/modules"
-    puppet.options = settings["puppet_options"] ||= ""
+    puppet.options = settings["vagrant"]["puppet_options"] ||= ""
   end
 end
