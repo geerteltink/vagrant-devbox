@@ -1,13 +1,13 @@
 #
 # Vagrant devbox
 #
-# To set the virtual machine project settings, copy `vendor/twentyfirsthall/vagrant-puppet/hieradata/default.yaml`
+# To set the virtual machine project settings, copy `vendor/xtreamwayz/vagrant-puppet/hieradata/default.yaml`
 # to `<project_path>/vagrant.yaml`.
 #
 # Personal settings can be stored in `~/.devbox/vagrant.yaml`.
 #
 # Vagrant settings are merged in this order:
-#   - `<project_path>/vendor/twentyfirsthall/vagrant-puppet/hieradata/default.yaml`
+#   - `<project_path>/vendor/xtreamwayz/vagrant-puppet/hieradata/default.yaml`
 #   - `<project_path>/vagrant.yaml`
 #   - `~/.devbox/vagrant.yaml`
 #
@@ -18,7 +18,7 @@ require 'yaml'
 display_name = File.basename(File.dirname(__FILE__))
 
 # Load default settings
-default_yaml = File.join(__dir__, "vendor/twentyfirsthall/vagrant-puppet/hieradata/default.yaml")
+default_yaml = File.join(__dir__, "vendor/xtreamwayz/vagrant-puppet/hieradata/default.yaml")
 settings = YAML.load_file(default_yaml)
 
 # Load project settings if any
@@ -103,10 +103,10 @@ Vagrant.configure(2) do |config|
 
   # Enable provisioning with Puppet stand alone.
   config.vm.provision :puppet do |puppet|
-    puppet.hiera_config_path = "vendor/twentyfirsthall/vagrant-puppet/hieradata/hiera.yaml"
-    puppet.manifests_path = "vendor/twentyfirsthall/vagrant-puppet/manifests"
+    puppet.hiera_config_path = "vendor/xtreamwayz/vagrant-puppet/hieradata/hiera.yaml"
+    puppet.manifests_path = "vendor/xtreamwayz/vagrant-puppet/manifests"
     puppet.manifest_file = "site.pp"
-    puppet.module_path = "vendor/twentyfirsthall/vagrant-puppet/modules"
+    puppet.module_path = "vendor/xtreamwayz/vagrant-puppet/modules"
     puppet.options = settings["vagrant"]["puppet_options"] ||= ""
   end
 end

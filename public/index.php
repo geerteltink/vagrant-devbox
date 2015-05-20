@@ -100,28 +100,18 @@ $extensions = [
         <h2>Docs</h2>
         <div style="-webkit-column-count:4;">
             <div>
-                <a href="https://github.com/twentyfirsthall/vagrant-devbox/blob/master/readme.md">
+                <a href="https://github.com/xtreamwayz/vagrant-devbox/blob/master/readme.md">
                     DevBox
                 </a>
             </div>
             <div>
-                <a href="https://github.com/twentyfirsthall/vagrant-puppet/blob/master/readme.md">
+                <a href="https://github.com/xtreamwayz/vagrant-puppet/blob/master/readme.md">
                     Puppet
                 </a>
             </div>
             <div>
-                <a href="https://github.com/twentyfirsthall/docs/blob/master/coding-standards.md">
-                    Coding standards
-                </a>
-            </div>
-            <div>
-                <a href="https://github.com/twentyfirsthall/docs/blob/master/git-workflow.md">
+                <a href="https://xtreamwayz.github.io/blog/git-worklow/">
                     Git workflow
-                </a>
-            </div>
-            <div>
-                <a href="https://github.com/twentyfirsthall/docs/blob/master/symfony-cli.md">
-                    Symfony console commands
                 </a>
             </div>
         </div>

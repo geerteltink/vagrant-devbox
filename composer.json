@@ -1,5 +1,5 @@
 {
-    "name"        : "twentyfirsthall/vagrant-devbox",
+    "name"        : "xtreamwayz/vagrant-devbox",
     "description" : "An out-of-the-box Vagrant development box managed by Composer",
     "type"        : "project",
     "keywords": [
@@ -7,7 +7,7 @@
         "Puppet",
         "Composer"
     ],
-    "homepage"    : "https://github.com/twentyfirsthall/vagrant-devbox",
+    "homepage"    : "https://github.com/xtreamwayz/vagrant-devbox",
     "license"     : "MIT",
     "authors": [{
         "name"    : "Geert Eltink",
@@ -15,6 +15,6 @@
         "role"    : "Lead Developer"
     }],
     "require-dev": {
-        "twentyfirsthall/vagrant-puppet": "~1.8"
+        "xtreamwayz/vagrant-puppet": "~2.0"
     }
 }
